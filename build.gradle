@@ -9,17 +9,18 @@ buildscript {
 
     dependencies {
         if(!project.hasProperty("bootstrap")) {
-            classpath group: "me.seeber.gradle", name: "gradle-bintray-config", version: "1.1.0"
-            classpath group: "me.seeber.gradle", name: "gradle-github-config", version: "1.1.0"
-            classpath group: "me.seeber.gradle", name: "gradle-license-config", version: "1.1.0"
-            classpath group: "me.seeber.gradle", name: "gradle-plugin-publish-config", version: "1.1.0"
+            classpath group: "me.seeber.gradle", name: "gradle-bintray-config", version: "1.1.1"
+            classpath group: "me.seeber.gradle", name: "gradle-github-config", version: "1.1.1"
+            classpath group: "me.seeber.gradle", name: "gradle-license-config", version: "1.1.1"
+            classpath group: "me.seeber.gradle", name: "gradle-plugin-publish-config", version: "1.1.1"
+            classpath group: "me.seeber.gradle", name: "gradle-project-config", version: "1.1.1"
         }
     }
 }
 
-version = "1.1.0"
+version = "1.1.1"
 group = "me.seeber.gradle"
-description = "Git plugin"
+description = "Gradle project configuration for Github Repositories"
 
 if(project.hasProperty("bootstrap")) {
     apply plugin: "groovy"
@@ -47,22 +48,16 @@ else {
 
     pluginBundle {
         tags = [
-            "github",
-            "build",
+            "git",
             "configuration"
         ]
 
-        plugins {
-            githubRepositoryPlugin {
-                id = "me.seeber.repository.github"
-                displayName = "Configuration for Github Repositories"
-            }
-        }
+        plugins { gitRepositoryPlugin.id = "me.seeber.repository.git" }
     }
 }
 
 dependencies {
-    compile(group: "me.seeber.gradle", name: "gradle-project-config", version: "1.1.0")
+    compile(group: "me.seeber.gradle", name: "gradle-project-config", version: "1.1.1")
     compile(group: "org.eclipse.jgit", name: "org.eclipse.jgit", version: "4.5.0.201609210915-r")
 
     if(project.hasProperty("bootstrap")) {
@@ -72,8 +67,8 @@ dependencies {
         compileOnly(group: "org.eclipse.jdt", name: "org.eclipse.jdt.annotation", version: "2.0.0")
     }
     else {
-        annotations(group: "me.seeber.annotations", name: "jdk-annotations", version: "1.8.0-r.2")
-        annotations(group: "me.seeber.annotations", name: "gradle-api-annotations", version: "3.1-r.2")
+        annotations(group: "me.seeber.annotations", name: "jdk-annotations", version: "1.8.0-r.3")
+        annotations(group: "me.seeber.annotations", name: "gradle-api-annotations", version: "3.1-r.3")
     }
 }
 
